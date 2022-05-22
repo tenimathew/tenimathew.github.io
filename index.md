@@ -1,7 +1,7 @@
 {::options parse_block_html="true" /}
 
-<details>
-    <summary>Section 1</summary>
+<details><summary>Section 1</summary>
+
 {::options parse_block_html="false" /}
 
 ## What is PL/SQL?
@@ -474,6 +474,7 @@ END;
 {::options parse_block_html="true" /}
 
 </details>
+
 {::options parse_block_html="false" /}
 
 <details>

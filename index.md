@@ -1,7 +1,6 @@
 {::options parse_block_html="true" /}
 
-<details>
-    <summary>Section 1</summary>
+<Section-1>
 
 {::options parse_block_html="false" /}
 
@@ -474,7 +473,7 @@ END;
 
 {::options parse_block_html="true" /}
 
-</details>
+</Section-1>
 
 {::options parse_block_html="false" /}
 

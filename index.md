@@ -1,5 +1,4 @@
-<details>
-    <summary>Section 1</summary>
+<details><summary>Section 1</summary>
 
 ## What is PL/SQL?
 

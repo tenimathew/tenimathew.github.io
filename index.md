@@ -2,7 +2,6 @@
 
 <details>
     <summary>Section 1</summary>
-{::options parse_block_html="false" /}
 
 ## What is PL/SQL?
 
@@ -471,10 +470,7 @@ BEGIN
 END;
 ```
 
-{::options parse_block_html="true" /}
-
 </details>
-{::options parse_block_html="false" /}
 
 <details>
     <summary>Interview Questions 1</summary>

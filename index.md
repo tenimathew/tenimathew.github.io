@@ -95,7 +95,7 @@ Pointers to other data items.
 - NULL and Boolean cannot be printed
 - To turn on output:
 
-```pgsql
+```sql
 SET SERVEROUTPUT ON;
 ```
 
@@ -109,7 +109,7 @@ In Oracle PL/SQL, RAW is a data type used to store binary data, or data which is
 
 ## CONSTANT, DEFAULT, NOT NULL
 
-```pgsql
+```sql
 SET SERVEROUTPUT ON;
 DECLARE
     V_PI CONSTANT NUMBER(7,6):=3.14; --Assigning is mandatory
@@ -126,7 +126,7 @@ END;
 
 It is a variable of the interface. This variable can be bonded with SQL or PL\SQL anonymous block. The scope of these variables is till the end of the session. These variables always preceded with a colon (:).
 
-```pgsql
+```sql
 VARIABLE v_bind1 VARCHAR2(25); --Not PL/SQL commands, SQL*Plus commands
 DECLARE
 BEGIN
@@ -148,7 +148,7 @@ SET AUTOPRINT ON -- To turn on automatic printing of bind variable while assigni
 
 It is used to pick up data type and size from a previously declared object into a new variable. Advantage of this is, when you change the data type or size of the field in the table, it will also affect this variable. So there is less maintenance.
 
-```pgsql
+```sql
 Ex: VNAME EMP.ENAME%TYPE;
     VNAME EMP%ROWTYPE; --> Record datatype variable
 ```
@@ -163,7 +163,7 @@ It is a variable created by combining two or more individual variables, called i
 
 ### Table-based Record
 
-```pgsql
+```sql
 DECLARE
     emp_rec emp%ROWTYPE;
 BEGIN
@@ -174,7 +174,7 @@ END;
 
 ### Cursor-based Record
 
-```pgsql
+```sql
 DECLARE
     CURSOR emp_cur IS
         SELECT empno, ename
@@ -188,7 +188,7 @@ END;
 
 ### User-defined Record
 
-```pgsql
+```sql
 DECLARE
     TYPE mytype IS RECORD(
         vemp_name VARCHAR2(20),
@@ -209,7 +209,7 @@ END;
 
 ### Nested Table type as block member
 
-```pgsql
+```sql
 DECLARE
     TYPE names_table IS TABLE OF VARCHAR2(10);
     TYPE grades IS TABLE OF INTEGER(2);
@@ -229,7 +229,7 @@ END;
 
 ### Nested table type as Database Object
 
-```pgsql
+```sql
 CREATE OR REPLACE TYPE my_nested_table IS TABLE OF VARCHAR2(10);
 ----
 CREATE TABLE my_subject(
@@ -247,7 +247,7 @@ SELECT sub.sub_id, sub.sub_name,ss_day.COLUMN_VALUE FROM my_subject sub,
 
 ### Nested table using user defined datatype
 
-```pgsql
+```sql
 CREATE OR REPLACE TYPE object_type AS OBJECT( --type object_type now can be used as any
                                               -- other built-in datatype like VARCHAR or NUMBER
     obj_id NUMBER,
@@ -273,7 +273,7 @@ CREATE TABLE base_table(
 
 ### VARRAYs as block member
 
-```pgsql
+```sql
 DECLARE
     TYPE team_four IS VARRAY(4) OF VARCHAR2(15);
     team team_four;
@@ -289,7 +289,7 @@ END;
 
 ### To modify VARRAY size limit
 
-```pgsql
+```sql
 ALTER TYPE type_name MODIFY LIMIT new_size_limit [INVALIDATE | CASCADE]
 ```
 
@@ -299,7 +299,7 @@ ALTER TYPE type_name MODIFY LIMIT new_size_limit [INVALIDATE | CASCADE]
 
 ### VARRAY as Database Object
 
-```pgsql
+```sql
 CREATE OR REPLACE TYPE dbObj_vry IS VARRAY(5) OF NUMBER;
 ----
 CREATE TABLE calendar(
@@ -316,7 +316,7 @@ SELECT tab1.day_name, tab1.day_date
 | -------- | ------------------------ |
 | Sunday   | HR.DBOBJ_VRY(7,14,21,28) |
 
-```pgsql
+```sql
 SELECT tab1.day_name, vry.COLUMN_VALUE
     FROM calendar tab1,
     TABLE (tab1.day_date) vry; -- Table expression
@@ -338,7 +338,7 @@ SELECT tab1.day_name, vry.COLUMN_VALUE
 - Similar to hash table in other languages.
 - Not need of initialization before assigning values to elements
 
-```pgsql
+```sql
 DECLARE
     TYPE salary IS TABLE OF NUMBER(5) INDEX BY VARCHAR2(20);
     salary_list salary;
@@ -368,7 +368,7 @@ END;
 
 Deletes elements from collection using index.
 
-```pgsql
+```sql
 names.DELETE; --delete all
 names.DELETE(1); --delete index 1
 names.DELETE(3,6) --delete index from 3 to 6
@@ -378,7 +378,7 @@ names.DELETE(3,6) --delete index from 3 to 6
 
 Deletes elements from end of varray or nested table.
 
-```pgsql
+```sql
 names.TRIM; --removes one element from the end of the collection
 names.TRIM(5); --removes 5 elements from the end of the collection
 ```
@@ -387,7 +387,7 @@ names.TRIM(5); --removes 5 elements from the end of the collection
 
 Memory for storing data has to be allocated before assigning value to the individual elements in the collection. It adds elements to end of varray or nested table. Cannot be used with Associative array.
 
-```pgsql
+```sql
 names.EXTEND; -- occupy one element with NULL
 names.EXTEND(5); -- occupy 5 elements with NULL
 names.EXTEND(5,1); --5 elements in the collection will be initialized with the value in the index 1 that is 28.
@@ -397,7 +397,7 @@ names.EXTEND(5,1); --5 elements in the collection will be initialized with the v
 
 Returns TRUE if and only if specified element (index) of varray or nested table exists.
 
-```pgsql
+```sql
 IF names.EXISTS(1) THEN
     DBMS_OUTPUT.PUT_LINE(names.COUNT);
 END IF;
@@ -407,7 +407,7 @@ END IF;
 
 Returns first and last index (subscript) in collection.
 
-```pgsql
+```sql
 DBMS_OUTPUT.PUT_LINE (names.FIRST); -- prints the index of first element
 DBMS_OUTPUT.PUT_LINE (names(names.LAST)); -- prints the value of last element
 ```
@@ -416,7 +416,7 @@ DBMS_OUTPUT.PUT_LINE (names(names.LAST)); -- prints the value of last element
 
 Returns number of elements in collection. No empty indexes are counted.
 
-```pgsql
+```sql
 DBMS_OUTPUT.PUT_LINE(names.COUNT);
 ```
 
@@ -424,7 +424,7 @@ DBMS_OUTPUT.PUT_LINE(names.COUNT);
 
 Returns maximum number of elements that collection (varray only) can have whether it is empty or not. For nested tables and associative arrays, which have no limit in size, LIMIT will return NULL.
 
-```pgsql
+```sql
 DBMS_OUTPUT.PUT_LINE(names.LIMIT);
 ```
 
@@ -432,14 +432,14 @@ DBMS_OUTPUT.PUT_LINE(names.LIMIT);
 
 Returns index that precedes and succeeds specified index.
 
-```pgsql
+```sql
 DBMS_OUTPUT.PUT_LINE (names.PRIOR(3)); -- prints the index of previous element
 DBMS_OUTPUT.PUT_LINE (names(names.NEXT(3))); --to print the value of next element
 ```
 
 ### EXTEND Procedure with 1 argument
 
-```pgsql
+```sql
 DECLARE
     TYPE team_four IS VARRAY(4) OF VARCHAR2(15);
     team team_four := team_four();
@@ -456,7 +456,7 @@ END;
 
 ### EXTEND Procedure without argument
 
-```pgsql
+```sql
 DECLARE
     TYPE team_four IS VARRAY(4) OF VARCHAR2(15);
     team team_four := team_four();--have to initialize without any values though. Cannot keep it as - team team_four;
@@ -477,38 +477,38 @@ END;
 
 1. Get the first day of the month
 
-```pgsql
+```sql
 SELECT TRUNC (SYSDATE, 'MONTH') "First day of current month" FROM DUAL;
 ```
 
 2. Get the first day of the Year
 
-```pgsql
+```sql
 SELECT TRUNC (SYSDATE, 'YEAR') "Year First Day" FROM DUAL;
 ```
 
 3. Get the last day of the month
 
-```pgsql
+```sql
 SELECT TRUNC (LAST_DAY (SYSDATE)) "Last day of current month" FROM DUAL;
 ```
 
 4. Get the last day of the year
 
-```pgsql
+```sql
 SELECT ADD_MONTHS (TRUNC (SYSDATE, 'YEAR'), 12) - 1 "Year Last Day" FROM DUAL
 --(TRUNC is used to get extract first day of the year from SYSDATE + 12 months = 1st Jan next year) - 1 day
 ```
 
 5. Get number of days in current month
 
-```pgsql
+```sql
 SELECT CAST (TO_CHAR (LAST_DAY (SYSDATE), 'dd') AS INT) number_of_days FROM DUAL;
 ```
 
 6. Get number of days left in current month
 
-```pgsql
+```sql
 SELECT SYSDATE,
 LAST_DAY (SYSDATE) "Last",
 LAST_DAY (SYSDATE) - SYSDATE "Days left" FROM DUAL;
@@ -516,7 +516,7 @@ LAST_DAY (SYSDATE) - SYSDATE "Days left" FROM DUAL;
 
 7. Get number of days between two dates
 
-```pgsql
+```sql
 SELECT ROUND ( (MONTHS_BETWEEN ('01-Feb-2014', '01-Mar-2012') * 30), 0) num_of_days FROM DUAL;
 (OR)
 SELECT TRUNC(sysdate) - TRUNC(e.hire_date) FROM employees e;
@@ -524,7 +524,7 @@ SELECT TRUNC(sysdate) - TRUNC(e.hire_date) FROM employees e;
 
 8. Display each months start and end date upto last month of the year
 
-```pgsql
+```sql
 SELECT ADD_MONTHS (TRUNC (SYSDATE, 'MONTH'), i) start_date, TRUNC (LAST_DAY (ADD_MONTHS (SYSDATE, i))) end_date
     FROM XMLTABLE (
         'for $i in 0 to xs:int(D) return $i'
@@ -537,77 +537,77 @@ SELECT ADD_MONTHS (TRUNC (SYSDATE, 'MONTH'), i) start_date, TRUNC (LAST_DAY (ADD
 
 9. Get number of seconds passed since today (since 00:00 hr)
 
-```pgsql
+```sql
 SELECT (SYSDATE - TRUNC (SYSDATE)) * 24 * 60 * 60 num_of_sec_since_morning FROM DUAL;
 ```
 
 10. Get number of seconds left today (till 23:59:59 hr)
 
-```pgsql
+```sql
 SELECT (TRUNC (SYSDATE+1) - SYSDATE) * 24 * 60 * 60 num_of_sec_left FROM DUAL;
 ```
 
 11. Check if a table exists in the current database schema
 
-```pgsql
+```sql
 SELECT table_name FROM user_tables
     WHERE table_name = 'TABLE_NAME';
 ```
 
 12. Check if a column exists in a table
 
-```pgsql
+```sql
 SELECT column_name AS FOUND FROM user_tab_cols
     WHERE table_name = 'TABLE_NAME' AND column_name = 'COLUMN_NAME';
 ```
 
 13. Showing the table structure
 
-```pgsql
+```sql
 SELECT DBMS_METADATA.GET_DDL ('TABLE', 'TABLE_NAME', 'USER_NAME') FROM DUAL;
 -- to get DDL for a view just replace first argument with ‘VIEW’ and second with your view name and so.
 ```
 
 14. Getting current schema
 
-```pgsql
+```sql
 SELECT SYS_CONTEXT ('userenv', 'current_schema') FROM DUAL;
 ```
 
 15. Changing current schema
 
-```pgsql
+```sql
 ALTER SESSION SET CURRENT_SCHEMA = new_schema;
 ```
 
 16. Database version information
 
-```pgsql
+```sql
 SELECT * FROM v$version;
 ```
 
 17. Database default information
 
-```pgsql
+```sql
 SELECT username, profile, default_tablespace, temporary_tablespace FROM dba_users;
 ```
 
 18. Database Character Set information
 
-```pgsql
+```sql
 SELECT * FROM nls_database_parameters;
 ```
 
 19. Get Oracle version
 
-```pgsql
+```sql
 SELECT VALUE
 FROM v$system_parameter WHERE name = 'compatible';
 ```
 
 20. Store data case sensitive but to index it case insensitive
 
-```pgsql
+```sql
 CREATE TABLE tab (col1 VARCHAR2 (10));
 
 CREATE INDEX idx1
@@ -621,7 +621,7 @@ so that they don’t occupy more space.
 
 21. Checking autoextend on/off for Tablespaces
 
-```pgsql
+```sql
 SELECT SUBSTR (file_name, 1, 50), AUTOEXTENSIBLE FROM dba_data_files;
 (OR)
 SELECT tablespace_name, AUTOEXTENSIBLE FROM dba_data_files;
@@ -629,7 +629,7 @@ SELECT tablespace_name, AUTOEXTENSIBLE FROM dba_data_files;
 
 22. Adding datafile to a tablespace
 
-```pgsql
+```sql
 ALTER TABLESPACE data01 ADD DATAFILE '/work/oradata/STARTST/data01.dbf'SIZE 1000M AUTOEXTEND OFF;
 ```
 

@@ -1,6 +1,6 @@
 {::options parse_block_html="true" /}
 
-<details>
+<section1>
     <summary>Section 1</summary>
 
 ## What is PL/SQL?
@@ -470,7 +470,7 @@ BEGIN
 END;
 ```
 
-</details>
+</section1>
 
 <details>
     <summary>Interview Questions 1</summary>

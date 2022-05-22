@@ -1,5 +1,8 @@
+{::options parse_block_html="true" /}
+
 <details>
     <summary>Section 1</summary>
+{::options parse_block_html="false" /}
 
 ## What is PL/SQL?
 
@@ -15,7 +18,7 @@
 - High performance, High productivity
 - Support object oriented programming
 
-```pgsql
+```sql
 DECLARE
     --Declaration statements
 BEGIN
@@ -468,7 +471,10 @@ BEGIN
 END;
 ```
 
+{::options parse_block_html="true" /}
+
 </details>
+{::options parse_block_html="false" /}
 
 <details>
     <summary>Interview Questions 1</summary>

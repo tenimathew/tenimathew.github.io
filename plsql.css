@@ -1,0 +1,66 @@
+/* ---------------
+    Common
+--------------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.5em;
+  font-size: 1.1rem;
+  overflow-x: hidden;
+}
+
+h2 {
+  color: #17365d;
+}
+
+h3 {
+  color: #325b8a;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+pre {
+  margin: 0;
+}
+
+code {
+  background-color: whitesmoke !important;
+  padding: 0 0.5em !important;
+  /* box-shadow: 2px 2px 3px 1px #888888; */
+  border-radius: 5px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #9e9e9e;
+}
+
+ol li {
+  margin-top: 2em;
+}
+
+.collapsible {
+  cursor: pointer;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 1em;
+  margin: 2em 0;
+}
+
+.inactive {
+  background-color: #9e9e9e;
+}
+
+.note {
+  border: solid #9e9e9e 1px;
+  padding: 0.2em 0.5em;
+  margin: 0.2em 0;
+  border-radius: 1em;
+}

@@ -1,0 +1,668 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oracle PL/SQL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,200&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/vs.min.css"
+      integrity="sha512-AVoZ71dJLtHRlsgWwujPT1hk2zxtFWsPlpTPCc/1g0WgpbmlzkqlDFduAvnOV4JJWKUquPc1ZyMc5eq4fRnKOQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="plsql.css" />
+  </head>
+  <body>
+    <div class="container" id="htmlContent">
+
+      <button type="button" class="collapsible">Section 1</button>
+      <section class="content" style="display: block">
+        <h2>What is PL/SQL?</h2>
+        <ul>
+          <li>Procedural Language/ Standard Query Language.</li>
+          <li>It is a procedural server side programming language</li>
+          <li>Used to bridge the gap of SQL being non-procedural.</li>
+          <li>Case-insensitive programming language.</li>
+        </ul>
+
+        <h2>Advantages of PL\SQL</h2>
+        <ul>
+          <li>Tight integration with SQL</li>
+          <li>Business logic can be directly implemented at database level</li>
+          <li>High performance, High productivity</li>
+          <li>Support object oriented programming</li>
+        </ul>
+
+        <pre><code class="language-sql">
+DECLARE
+    --Declaration statements
+BEGIN
+    --Executable statements
+EXCEPTION
+    --Exception handling statements
+END;
+            </code></pre>
+
+        <h2>PL/SQL Blocks</h2>
+        <p>Blocks are basic programming units in PL/SQL programming language</p>
+        <h3>Anonymous Block</h3>
+        <p>
+          As this block is created without a name, this block does not create
+          any object in the database. Thus, the scope for reusability is zero.
+          It compiles every time you execute.
+        </p>
+        <h3>Named Block</h3>
+        <p>
+          It creates a database object. Complied for one time and stored for
+          reuse.
+        </p>
+
+        <h2>Early vs. Late Binding</h2>
+        <p>
+          Late binding means code is compiled at execution. Early binding means
+          code is compiled prior to execution.
+        </p>
+
+        <h2>PL/SQL Data types</h2>
+        <h3>Scalar</h3>
+        <p>Single values with no internal components.</p>
+        <p>
+          <strong>Numeric: </strong> BINARY_DOUBLE, BINARY_FLOAT,
+          BINARY_INTEGER, DEC, DECIMAL, DOUBLE PRECISION, FLOAT, INT, INTEGER,
+          NATURAL, NATURALN, NUMBER, NUMERIC, PLS_INTEGER, POSITIVE, POSITIVEN,
+          REAL, SIGNTYPE, SMALLINT
+        </p>
+        <p>
+          <strong>Character: </strong>CHAR, CHARACTER, LONG, LONG RAW, NCHAR,
+          NVARCHAR2, RAW, ROWID, STRING, UROWID, VARCHAR, VARCHAR2
+        </p>
+        <p><strong>Boolean: </strong>BOOLEAN</p>
+        <p>
+          <strong>Datetime: </strong>DATE, TIMESTAMP, TIMESTAMP WITH TIMEZONE,
+          TIMESTAMP WITH LOCAL TIMEZONE, INTERVAL YEAR TO MONTH, INTERVAL DAY TO
+          SECOND
+        </p>
+        <h3>Large Object (LOB)</h3>
+        <p>
+          Pointers to large objects that are stored separately from other data
+          items, such as text, graphic images, video clips, and sound waveforms.
+        </p>
+        <p>
+          BFILE (Binary File - Points to File Outside DB), BLOB (Binary Large
+          Object), CLOB (Character Large Object), NCLOB (National Character
+          Large Object)
+        </p>
+        <h3>Composite</h3>
+        <p>
+          Data items that have internal components that can be accessed
+          individually.
+        </p>
+        <p>RECORDS, COLLECTIONS</p>
+        <h3>Reference</h3>
+        <p>Pointers to other data items.</p>
+
+        <h2>PLS_INTEGER and BINARY_INTEGER</h2>
+        <h3>PLS_INTEGER</h3>
+        <ul>
+          <li>PLS_INTEGER gives better performance</li>
+          <li>Requires less storage space than INTEGER and NUMBER types</li>
+          <li>Use when more calculations are there</li>
+          <li>
+            Uses machine arithmetic; while NUMBER requires additional calls to
+            library routines.
+          </li>
+          <li>INTEGER require extra runtime checks</li>
+        </ul>
+        <h3>BINARY_INTEGER</h3>
+        <ul>
+          <li>Used for declaring signed integer variables</li>
+          <li>Stored in binary format , which takes less space</li>
+          <li>
+            Calculations can run slightly faster because the values are already
+            stored in binary format
+          </li>
+          <li>
+            Uses native math libraries which does not allocate memory to store
+            the variable until a value is assigned.
+          </li>
+        </ul>
+
+        <div class="note">
+          <h2>Note:</h2>
+          <ul>
+            <li>
+              <strong>NULL</strong> and <strong>Boolean</strong> cannot be
+              printed
+            </li>
+            <li>
+              To turn on output:
+              <pre><code class="language-sql">SET SERVEROUTPUT ON;</code></pre>
+            </li>
+            <li>Only one LONG column can be used per table.</li>
+            <li>
+              The minimum column width that can be specified for a varchar2 data
+              type column is one.
+            </li>
+            <li>
+              The value for a CHAR data type column is blank-padded to the
+              maximum defined column width.
+            </li>
+          </ul>
+        </div>
+
+        <h2>RAW Datatype</h2>
+        <p>
+          In Oracle PL/SQL, RAW is a data type used to store binary data, or
+          data which is byte oriented (for example, graphics or audio files).
+          One of the most important things to note about RAW data is that it can
+          only be queried or inserted; RAW data cannot be manipulated. RAW data
+          is always returned as a hexadecimal character value
+        </p>
+
+        <h2>CONSTANT, DEFAULT, NOT NULL</h2>
+        <pre><code class="language-sql">
+SET SERVEROUTPUT ON; 
+DECLARE
+    V_PI CONSTANT NUMBER(7,6):=3.14; --Assigning is mandatory 
+    V_NAME VARCHAR2(20) DEFAULT 'Unknown'; --Assigning is mandatory 
+    V_AGE NUMBER NOT NULL :=50; --Assigning is mandatory
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('v_pi:' ||V_PI); 
+    DBMS_OUTPUT.PUT_LINE('v_name:'||V_NAME); 
+    DBMS_OUTPUT.PUT_LINE('v_age:'||V_AGE);
+END;
+            </code></pre>
+
+        <h2>Host/Bind/Session Variable</h2>
+        <p>
+          It is a variable of the interface. This variable can be bonded with
+          SQL or PL\SQL anonymous block. The scope of these variables is till
+          the end of the session. These variables always preceded with a colon
+          (:).
+        </p>
+        <pre><code class="language-sql">
+VARIABLE v_bind1 VARCHAR2(25); --Not PL/SQL commands, SQL*Plus commands
+DECLARE
+BEGIN
+    :v_bind1 := 'Binding 1';
+    DBMS_OUTPUT.PUT_LINE(:v_bind1); 
+END;
+--Not PL/SQL statements--
+VARIABLE v_bind2 VARCHAR2(25);
+VARIABLE v_bind3 VARCHAR2(25);
+EXECUTE :v_bind2 := 'Binding 2'; -- SQL*Plus command
+EXECUTE :v_bind3 := 'Binding 3';
+PRINT :v_bind2;
+PRINT; -- Displays all bind variable values in the session
+----
+SET AUTOPRINT ON -- To turn on automatic printing of bind variable while assigning
+            </code></pre>
+
+        <h2>Anchored Data type/ Inheriting data type</h2>
+        <p>
+          It is used to pick up data type and size from a previously declared
+          object into a new variable. Advantage of this is, when you change the
+          data type or size of the field in the table, it will also affect this
+          variable. So there is less maintenance.
+        </p>
+        <pre><code class="language-sql">Ex: VNAME EMP.ENAME%TYPE; 
+    VNAME EMP%ROWTYPE; --> Record datatype variable</code></pre>
+
+        <h2>Composite Variable</h2>
+        <p>
+          It is a variable created by combining two or more individual
+          variables, called indicators, into a single variable. Records and
+          Collections
+        </p>
+        <ul>
+          <li>Records and Collections are composite variable types.</li>
+          <li>
+            A record is a group of related data items which can have different
+            data types called fields. Each element is addressed by
+            VARIABLE_NAME.FIELD_NAME.
+          </li>
+          <li>
+            A collection is group of elements, which have the same data type
+            called elements. Each element is addressed by a unique subscript.
+            Ex: VARIABLE_NAME(INDEX).
+          </li>
+        </ul>
+
+        <div class="note">
+          <h3>Table-based Record</h3>
+          <pre><code class="language-sql">
+DECLARE
+    emp_rec emp%ROWTYPE; 
+BEGIN
+    SELECT * INTO emp_rec FROM emp
+    WHERE empno=7369;
+END;
+                </code></pre>
+        </div>
+
+        <div class="note">
+          <h3>Cursor-based Record</h3>
+          <pre><code class="language-sql">
+DECLARE
+    CURSOR emp_cur IS
+        SELECT empno, ename
+        FROM emp; 
+BEGIN
+    FOR i IN emp_cur LOOP 
+        DBMS_OUTPUT.PUT_LINE(i.ename); 
+    END LOOP;
+END;
+                </code></pre>
+        </div>
+
+        <div class="note">
+          <h3>User-defined Record</h3>
+          <pre><code class="language-sql">
+DECLARE
+    TYPE mytype IS RECORD(
+        vemp_name VARCHAR2(20),
+        vemp_salary emp.sal %TYPE); 
+    vdata mytype;
+BEGIN
+    SELECT ename,sal INTO vdata FROM emp WHERE empno=7369;
+    DBMS_OUTPUT.PUT_LINE(vdata.vemp_name); 
+END;
+                </code></pre>
+        </div>
+
+        <h2>Nested Tables</h2>
+        <ul>
+            <li>
+            Persistent collection - Stores data and structure physically into
+            the database as database object </li>
+            <li>No upper limits on rows
+            (Unbounded) </li>
+            <li>Need external table for its storage (STORE AS clause
+            --while creating table) </li>
+            <li>Initialization needed before assigning
+            values to elements</li>
+            </li>
+        </ul>
+
+        <h3>Nested Table type as block member</h3>
+        <pre><code class="language-sql">
+DECLARE
+    TYPE names_table IS TABLE OF VARCHAR2(10); 
+    TYPE grades IS TABLE OF INTEGER(2);
+    names names_table;
+    marks grades;
+    total INTEGER(3);
+BEGIN
+    names := names_table('Kavita','Pritam','Ayan','Rishav','Aziz'); -- Initialization 
+    names(1) := 'Gaurav'; --Assigning
+    marks := grades(98,97,78,87,92);
+    total := names.COUNT;
+    FOR i IN 1 .. total LOOP
+        DBMS_OUTPUT.PUT_LINE('Student:' || names(i) || ' Marks:' || marks(i));
+    END LOOP; 
+END;
+            </code></pre>
+
+        <h3>Nested table type as Database Object</h3>
+        <pre><code class="language-sql">
+CREATE OR REPLACE TYPE my_nested_table IS TABLE OF VARCHAR2(10); 
+----
+CREATE TABLE my_subject(
+    sub_id NUMBER(3),
+    sub_name VARCHAR2(20),
+    sub_schedule_day my_nested_table --nested table type
+) NESTED TABLE sub_schedule_day --name of the column you want to use as nested table column 
+STORE AS nested_tab_space; -- storage table for your nested table type (user-defined name) 
+----
+INSERT INTO my_subject VALUES(101,'Maths',my_nested_table('Monday','Friday'));
+----
+SELECT sub.sub_id, sub.sub_name,ss_day.COLUMN_VALUE FROM my_subject sub,
+    TABLE(sub.sub_schedule_day) ss_day -- Table expression
+            </code></pre>
+
+        <h3>Nested table using user defined datatype</h3>
+        <pre><code class="language-sql">
+CREATE OR REPLACE TYPE object_type AS OBJECT( --type object_type now can be used as any 
+                                              -- other built-in datatype like VARCHAR or NUMBER
+    obj_id NUMBER,
+    obj_name VARCHAR2(10) );
+----
+CREATE OR REPLACE TYPE my_nesd_tbl IS TABLE OF object_type; 
+--It is not possible to add size limit to user defined datatype like object_type(5) as we do with VARCHAR2(5) 
+--because it is not a scalar datatype
+----
+CREATE TABLE base_table(
+    tab_id NUMBER,
+    tab_ele my_nesd_tbl
+) NESTED TABLE tab_ele STORE AS store_tab_1;
+            </code></pre>
+
+        <h2>VARRAYs</h2>
+        <ul>
+            <li>Persistent collection - Stores data and structure physically into the database as database object</li>
+            <li>Can hold fixed number of elements(Bounded)</li>
+            <li>Modified version of Nested tables</li>
+            <li>Stored in-line with their parent record as raw value in the parent table (No need of STORE AS clause)</li>
+            <li>Initialization needed before assigning values to elements</li>
+        </ul>
+
+        <h3>VARRAYs as block member</h3>
+        <pre><code class="language-sql">
+DECLARE
+    TYPE team_four IS VARRAY(4) OF VARCHAR2(15); 
+    team team_four;
+BEGIN
+    team := team_four('John','Mary','Alberto','Juanita'); -- Initialization 
+    team(3) := 'Pierre'; --Assigning
+    team(4) := 'Yvonne';
+    FOR i IN 1..team.LIMIT LOOP
+        DBMS_OUTPUT.PUT_LINE(i || team(i)); 
+    END LOOP;
+END;
+            </code></pre>
+
+        <h3>To modify VARRAY size limit</h3>
+        <pre><code class="language-sql">ALTER TYPE type_name MODIFY LIMIT new_size_limit [INVALIDATE | CASCADE]</code></pre>
+        <p><strong>--INVALIDATE:</strong> Marks all dependent TYPES and TABLES as INVALID</p>
+        <p><strong>--CASCADE:</strong> Cascades(propagate) the change to all dependent TYPES and TABLES</p>
+
+
+        <h3>VARRAY as Database Object</h3>
+        <pre><code class="language-sql">
+CREATE OR REPLACE TYPE dbObj_vry IS VARRAY(5) OF NUMBER;
+----
+CREATE TABLE calendar(
+    day_name VARCHAR2(25),
+    day_date dbObj_vry); -- No STORE AS clause is needed
+----
+INSERT INTO calendar VALUES('Sunday',dbObj_vry(7,14,21,28));
+----
+SELECT tab1.day_name, tab1.day_date
+    FROM calendar tab1; -- Without Table expression
+            </code></pre>     
+
+        <table>
+            <tr>
+                <th>DAY_NAME</th>
+                <th>COLUMN_VALUE</th>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>HR.DBOBJ_VRY(7,14,21,28)</td>
+            </tr>
+        </table>
+
+        <pre><code class="language-sql">
+SELECT tab1.day_name, vry.COLUMN_VALUE
+    FROM calendar tab1,
+    TABLE (tab1.day_date) vry; -- Table expression
+            </code></pre>
+
+        <table>
+            <tr>
+                <th>DAY_NAME</th>
+                <th>COLUMN_VALUE</th>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>28</td>
+            </tr>
+        </table>
+        
+        <h2>Associative Arrays/ Index by table</h2>
+        <ul>
+            <li>Non-Persistent collection - Stores data and structure just for one session. No database object can be created.</li>
+            <li>Unbounded collection</li>
+            <li>Hold similar data type in key-value pair</li>
+            <li>Can access elements using numbers and strings as subscript values.</li>
+            <li>Similar to hash table in other languages.</li>
+            <li>Not need of initialization before assigning values to elements</li>
+        </ul>
+
+        <pre><code class="language-sql">
+DECLARE
+    TYPE salary IS TABLE OF NUMBER(5) INDEX BY VARCHAR2(20); 
+    salary_list salary;
+    name VARCHAR2(20);
+BEGIN
+    salary_list('Ranjish') := 6200; --No initialization needed before assigning 
+    salary_list('Minakshi') := 75000;
+    salary_list('Martin') := 10000;
+    name := salary_list.FIRST;
+    WHILE name IS NOT NULL LOOP
+        DBMS_OUTPUT.PUT_LINE('Salary of ' || name || 'is ' || salary_list(name)); 
+        name := salary_list.NEXT(name);
+    END LOOP; 
+END;
+            </code></pre>
+
+        <h2>NLS_SORT and NLS_COMP</h2>
+        <ul>
+            <li>In associative arrays, string index's sort order is determined by the initialization parameters NLS_SORT and NLS_COMP parameter</li>
+            <li>If you change the value of either parameter after populating an associative array indexed by string, then the collection methods FIRST, LAST, NEXT, and PRIOR might return unexpected values or raise exceptions.</li>
+            <li>If you have changed these parameter values during your session, restore their original values before operating on associative arrays indexed by string.</li>
+            <li>Default value for both parameter is BINARY</li>
+        </ul>
+
+        <h2>Collection Methods (3 Procedures + 7 Functions)</h2>
+       
+            <h3>DELETE</h3> 
+            <p>Deletes elements from collection using index.</p>   
+            <pre><code class="language-sql">
+names.DELETE; --delete all
+names.DELETE(1); --delete index 1 
+names.DELETE(3,6) --delete index from 3 to 6
+                </code></pre>
+
+            <h3>TRIM</h3>
+             <p>Deletes elements from end of varray or nested table.</p>
+             <pre><code class="language-sql">
+names.TRIM; --removes one element from the end of the collection 
+names.TRIM(5); --removes 5 elements from the end of the collection
+                </code></pre>
+
+            <h3>EXTEND</h3>
+             <p>Memory for storing data has to be allocated before assigning value to the individual elements in the collection. It adds elements to end of varray or nested table. Cannot be used with Associative array.</p>
+             <pre><code class="language-sql">
+names.EXTEND; -- occupy one element with NULL
+names.EXTEND(5); -- occupy 5 elements with NULL
+names.EXTEND(5,1); --5 elements in the collection will be initialized with the value in the index 1 that is 28.
+                </code></pre>
+
+            <h3>EXISTS</h3>
+             <p>Returns TRUE if and only if specified element (index) of varray or nested table exists.</p>
+             <pre><code class="language-sql">
+IF names.EXISTS(1) THEN
+    DBMS_OUTPUT.PUT_LINE(names.COUNT); 
+END IF;
+                </code></pre>
+
+            <h3>FIRST,LAST</h3>
+             <p>Returns first and last index (subscript) in collection.</p>
+             <pre><code class="language-sql">
+DBMS_OUTPUT.PUT_LINE (names.FIRST); -- prints the index of first element 
+DBMS_OUTPUT.PUT_LINE (names(names.LAST)); -- prints the value of last element
+                </code></pre>
+
+            <h3>COUNT</h3>
+             <p>Returns number of elements in collection. No empty indexes are counted.</p> 
+             <pre><code class="language-sql">
+DBMS_OUTPUT.PUT_LINE(names.COUNT);
+                </code></pre>
+
+            <h3>LIMIT</h3>
+             <p>Returns maximum number of elements that collection (varray only) can have whether it is empty or not. For nested tables and associative arrays, which have no limit in size, LIMIT will return NULL.</p>
+             <pre><code class="language-sql">
+DBMS_OUTPUT.PUT_LINE(names.LIMIT);
+                </code></pre>
+
+            <h3>PRIOR, NEXT</h3>
+             <p>Returns index that precedes and succeeds specified index.</p>
+             <pre><code class="language-sql">
+DBMS_OUTPUT.PUT_LINE (names.PRIOR(3)); -- prints the index of previous element 
+DBMS_OUTPUT.PUT_LINE (names(names.NEXT(3))); --to print the value of next element
+                </code></pre>
+      
+            <h3>EXTEND Procedure with 1 argument</h3>
+            <pre><code class="language-sql">
+DECLARE
+    TYPE team_four IS VARRAY(4) OF VARCHAR2(15); 
+    team team_four := team_four();
+BEGIN
+    --if we do not want to initialize like team := team_four('John','Mary','Al','Ju'); 
+        --EXTEND will help to initialize those memory with NULL values
+    team.EXTEND(4); --will occupy 4 elements team(3) := 'Pierre';
+    team(4) := 'Yvonne';
+    FOR i IN 1..team.LIMIT LOOP
+        DBMS_OUTPUT.PUT_LINE(i || team(i)); 
+    END LOOP;
+END;
+                </code></pre>
+            
+            <h3>EXTEND Procedure without argument</h3>
+            <pre><code class="language-sql">
+DECLARE
+    TYPE team_four IS VARRAY(4) OF VARCHAR2(15); 
+    team team_four := team_four();--have to initialize without any values though. Cannot keep it as - team team_four;
+BEGIN
+    FOR i IN 1..team.LIMIT LOOP 
+        team.EXTEND;--Only one element will be occupied with NULL. If we try to assign next element, 
+                    --we will get error; because the memory for the next element is not initialized.
+        team(i) := 'Pierre' || i;
+        DBMS_OUTPUT.PUT_LINE(i || team(i)); 
+    END LOOP;
+END;
+                </code></pre>
+      </section>
+
+      <button type="button" class="collapsible">Interview Questions 1</button>
+      <section class="content" style="display: block">
+        <ol>
+            <li>Get the first day of the month</li>
+            <pre><code>SELECT TRUNC (SYSDATE, 'MONTH') "First day of current month" FROM DUAL;</code></pre>
+            
+            <li>Get the first day of the Year</li>
+            <pre><code>SELECT TRUNC (SYSDATE, 'YEAR') "Year First Day" FROM DUAL;</code></pre>
+            
+            <li>Get the last day of the month</li>
+            <pre><code>SELECT TRUNC (LAST_DAY (SYSDATE)) "Last day of current month" FROM DUAL;</code></pre>
+
+            <li>Get the last day of the year</li>
+            <pre><code>SELECT ADD_MONTHS (TRUNC (SYSDATE, 'YEAR'), 12) - 1 "Year Last Day" FROM DUAL 
+--(TRUNC is used to get extract first day of the year from SYSDATE + 12 months = 1st Jan next year) - 1 day</code></pre>
+
+            <li>Get number of days in current month</li>
+            <pre><code>SELECT CAST (TO_CHAR (LAST_DAY (SYSDATE), 'dd') AS INT) number_of_days FROM DUAL;</code></pre>
+
+            <li>Get number of days left in current month</li>
+            <pre><code>SELECT SYSDATE,
+    LAST_DAY (SYSDATE) "Last",
+    LAST_DAY (SYSDATE) - SYSDATE "Days left" FROM DUAL;</code></pre>
+
+            <li>Get number of days between two dates</li>
+            <pre><code>SELECT ROUND ( (MONTHS_BETWEEN ('01-Feb-2014', '01-Mar-2012') * 30), 0) num_of_days FROM DUAL;
+(OR)
+SELECT TRUNC(sysdate) - TRUNC(e.hire_date) FROM employees e;</code></pre>
+
+            <li>Display each months start and end date upto last month of the year</li>
+            <pre><code>
+SELECT ADD_MONTHS (TRUNC (SYSDATE, 'MONTH'), i) start_date, TRUNC (LAST_DAY (ADD_MONTHS (SYSDATE, i))) end_date
+    FROM XMLTABLE (
+        'for $i in 0 to xs:int(D) return $i' 
+            PASSING XMLELEMENT (
+                d,
+                FLOOR (MONTHS_BETWEEN (ADD_MONTHS (TRUNC (SYSDATE, 'YEAR') - 1, 12), SYSDATE))
+            )
+    COLUMNS i INTEGER PATH '.');
+                </code></pre>
+
+            <li>Get number of seconds passed since today (since 00:00 hr)</li>
+            <pre><code>SELECT (SYSDATE - TRUNC (SYSDATE)) * 24 * 60 * 60 num_of_sec_since_morning FROM DUAL;</code></pre>
+
+            <li>Get number of seconds left today (till 23:59:59 hr)</li>
+            <pre><code>SELECT (TRUNC (SYSDATE+1) - SYSDATE) * 24 * 60 * 60 num_of_sec_left FROM DUAL;</code></pre>
+
+            <li>Check if a table exists in the current database schema</li>
+            <pre><code>SELECT table_name FROM user_tables
+    WHERE table_name = 'TABLE_NAME';</code></pre>
+
+            <li>Check if a column exists in a table</li>
+            <pre><code>SELECT column_name AS FOUND FROM user_tab_cols
+    WHERE table_name = 'TABLE_NAME' AND column_name = 'COLUMN_NAME';</code></pre>
+
+            <li>Showing the table structure</li>
+            <pre><code>SELECT DBMS_METADATA.GET_DDL ('TABLE', 'TABLE_NAME', 'USER_NAME') FROM DUAL;
+-- to get DDL for a view just replace first argument with ‘VIEW’ and second with your view name and so.</code></pre>
+
+            <li>Getting current schema</li>
+            <pre><code>SELECT SYS_CONTEXT ('userenv', 'current_schema') FROM DUAL;</code></pre>
+
+            <li>Changing current schema</li>
+            <pre><code>ALTER SESSION SET CURRENT_SCHEMA = new_schema;</code></pre>
+
+            <li>Database version information</li>
+            <pre><code>SELECT * FROM v$version;</code></pre>
+
+            <li>Database default information</li>
+            <pre><code>SELECT username, profile, default_tablespace, temporary_tablespace FROM dba_users;</code></pre>
+
+            <li>Database Character Set information</li>
+            <pre><code>SELECT * FROM nls_database_parameters; 
+Get Oracle version
+SELECT VALUE
+FROM v$system_parameter WHERE name = 'compatible';</code></pre>
+
+            <li>Store data case sensitive but to index it case insensitive</li>
+            <pre><code>CREATE TABLE tab (col1 VARCHAR2 (10)); 
+
+CREATE INDEX idx1
+ON tab (UPPER (col1));
+
+ANALYZE TABLE tab COMPUTE STATISTICS;
+--In your query you might do UPPER(..) = UPPER(..) on both sides to make it case
+insensitive. Now in such cases, you might want to make your index case insensitive
+so that they don’t occupy more space.</code></pre>
+
+            <li>Checking autoextend on/off for Tablespaces</li>
+            <pre><code>SELECT SUBSTR (file_name, 1, 50), AUTOEXTENSIBLE FROM dba_data_files; 
+(OR)
+SELECT tablespace_name, AUTOEXTENSIBLE FROM dba_data_files;</code></pre>
+
+            <li>Adding datafile to a tablespace</li>
+            <pre><code>ALTER TABLESPACE data01 ADD DATAFILE '/work/oradata/STARTST/data01.dbf'SIZE 1000M AUTOEXTEND OFF;</code></pre>
+
+            <li></li>
+            <pre><code></code></pre>
+        </ol>
+        
+      </section>
+
+    </div>
+  </body>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+<script src="plsql.js"></script>
+</html>

@@ -2,3 +2,4 @@
 - [Interview Question 1](interview/1.md)
 - [Section 2](theory/2.md)
 - [Interview Question 2](interview/2.md)
+- [Section 3](theory/3.md)

@@ -5,5 +5,3 @@ relative_links:
   collections: true
 include:
   - index.md
-  - plsql\index.md
-  - plsql\section1.md

@@ -1,1 +1,1 @@
-- [PLSQL](plsql\index.md)
+- [PLSQL](index.md)

@@ -6,3 +6,5 @@
 - [Interview Question 3](interview/3.md)
 - [Section 4](theory/4.md)
 - [Interview Question 4](interview/4.md)
+- [Section 5](theory/5.md)
+- [Interview Question 5](interview/5.md)
